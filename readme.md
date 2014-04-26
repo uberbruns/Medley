@@ -21,9 +21,9 @@ medley.loadPlugin(__dirname +'/src/medley-sensor-tag.js');
 ```javascript
 medley.config({
 
-    hid: {
-      gamepad: {
-        path: 'USB_07b5_0312_fd120000'
+    hid: {                                           // Plugin
+      gamepad: {                                     // Configuration
+        path: 'USB_07b5_0312_fd120000' 
       }
     },
 
@@ -41,8 +41,10 @@ medley.config({
 
 ### Create Program
 
-```
-medley.createProgram('mix', ['hid:gamepad', 'sensorTag:one'], function(program, gamepad, sensorTag) {
+```javascript
+medley.createProgram('mix',                       // Program name
+    ['hid:gamepad', 'sensorTag:one'],             // Dependencies
+    function(program, gamepad, sensorTag) {       // Program
 
   gamepad.on('dataChange', function() {
     var data = gamepad.state.data;
