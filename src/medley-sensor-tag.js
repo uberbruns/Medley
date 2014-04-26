@@ -42,7 +42,6 @@ SensorTagUnit.prototype.start = function(config) {
       },
 
       function(callback) {
-
         if (config.readKeys === true) {
           sensorTag.notifySimpleKey(function() {});
           sensorTag.on('simpleKeyChange', function(left, right) {
@@ -51,9 +50,7 @@ SensorTagUnit.prototype.start = function(config) {
             that.emit('change', 'keys', keys);
           });
         }
-
         callback();
-
       },
 
       function(callback) {
@@ -77,7 +74,6 @@ SensorTagUnit.prototype.start = function(config) {
         }
       },
 
-
     ]);
 
     that.emit('logInfo' ,PLUGIN_NAME, 'SensorTag Found');
@@ -92,13 +88,13 @@ module.exports = {
   pluginName: PLUGIN_NAME,
   classDef: SensorTagUnit,
 
-  onLoad: function(units) {
+  onLoad: function(medley) {
 
-    units.logInfo(PLUGIN_NAME, 'Discover…');
+    medley.logInfo(PLUGIN_NAME, 'Discover…');
 
     SensorTag.discover(function(sensorTag) {
 
-      units.logInfo(PLUGIN_NAME, 'UUID: ' + sensorTag.uuid);
+      medley.logInfo(PLUGIN_NAME, 'UUID: ' + sensorTag.uuid);
 
     });
 

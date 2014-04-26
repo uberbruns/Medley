@@ -63,13 +63,13 @@ module.exports = {
   pluginName: PLUGIN_NAME,
   classDef: HIDUnit,
 
-  onLoad: function(units) {
+  onLoad: function(medley) {
 
     var device, devices = HID.devices();
     
     for (var i = 0; i < devices.length; i++) {
        device = devices[i];
-       units.log(0, 'hid', device.product + ': ' + device.path);
+       medley.log(0, 'hid', device.product + ': ' + device.path);
      }
 
   }
