@@ -2,7 +2,7 @@
 
 ## Description
 
-Medley is a node library to easyly interweave different type of hardware. It is plugin-based.
+Medley is a node library to easily interweave different type of hardware. New Hardware is integrated via plugins.
 
 User-defined programs run as soon as their required hardware is ready.
 
