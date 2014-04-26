@@ -16,7 +16,7 @@ medley.loadPlugin(__dirname +'/src/medley-hid.js');
 medley.loadPlugin(__dirname +'/src/medley-sensor-tag.js');
 ```
 
-\* node module planned
+\* node modules planned
 
 ### Config Hardware
 
