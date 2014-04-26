@@ -1,0 +1,9 @@
+https://github.com/OpenNI/OpenNI
+
+https://www.npmjs.org/package/sensortag
+
+https://github.com/totakke/homebrew-openni
+
+http://com.occipital.openni.s3.amazonaws.com/NITE-Bin-MacOSX-v1.5.2.21.tar.zip
+
+https://github.com/leapmotion/leapjs

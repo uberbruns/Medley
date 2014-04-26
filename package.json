@@ -1,0 +1,23 @@
+{
+  "name": "Medley",
+  "version": "0.0.1",
+  "description": "Require.js for Hardware",
+  "main": "index.js",
+  "dependencies": {
+    "sensortag": "~0.1.7",
+    "async": "~0.7.0",
+    "colors": "~0.6.2",
+    "string": "~1.8.1"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-nodemon": "~0.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause"
+}
