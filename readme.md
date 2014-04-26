@@ -8,13 +8,15 @@ User-defined programs run as soon as their required hardware is ready.
 
 ## Usage
 
-### Import
+### Import \*
 
 ```javascript
 var medley = require(__dirname +'/src/medley.js');
 medley.loadPlugin(__dirname +'/src/medley-hid.js');
 medley.loadPlugin(__dirname +'/src/medley-sensor-tag.js');
 ```
+
+\* node module planned
 
 ### Config Hardware
 
