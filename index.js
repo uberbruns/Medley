@@ -22,6 +22,7 @@ medley.config({
 });
 
 
+
 medley.createProgram('mix', ['hid:gamepad', 'sensorTag:one'], function(program, gamepad, sensorTag) {
 
   gamepad.on('dataChange', function() {
@@ -40,6 +41,7 @@ medley.createProgram('mix', ['hid:gamepad', 'sensorTag:one'], function(program, 
   });
 
 });
+
 
 
 medley.createProgram('controller', ['hid:gamepad'], function(program, gamepad) {
