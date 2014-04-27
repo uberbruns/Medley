@@ -6,8 +6,6 @@ medley.loadPlugin(__dirname +'/src/medley-leap.js');
 medley.loadPlugin(__dirname +'/src/medley-midi.js');
 
 
-
-
 medley.config({
 
     hid: {
@@ -40,6 +38,11 @@ medley.config({
 });
 
 
+medley.loadProgram(__dirname +'/programs/soundboard/index.js');
+medley.loadProgram(__dirname +'/programs/spotify/index.js');
+
+
+
 medley.createProgram('mix', ['hid:gamepad', 'sensorTag:one'], function(program, gamepad, sensorTag) {
 
   gamepad.on('dataChange', function() {
@@ -70,6 +73,7 @@ medley.createProgram('gamepad', ['hid:gamepad'], function(program, gamepad) {
 });
 
 
+
 medley.createProgram('makeymakey', ['hid:makeymakey'], function(program, makeymakey) {
 
   makeymakey.on('dataChange', function(data) {
@@ -77,6 +81,7 @@ medley.createProgram('makeymakey', ['hid:makeymakey'], function(program, makeyma
   });
 
 });
+
 
 
 medley.createProgram('leap', ['leap:one'], function(program, leap) {
@@ -100,3 +105,4 @@ medley.createProgram('midi', ['midi:mpk'], function(program, mpk) {
   });
 
 });
+

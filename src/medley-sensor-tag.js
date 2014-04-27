@@ -90,6 +90,7 @@ module.exports = {
 
   onLoad: function(medley) {
 
+    /*
     medley.logInfo(PLUGIN_NAME, 'Discover…');
 
     SensorTag.discover(function(sensorTag) {
@@ -97,6 +98,7 @@ module.exports = {
       medley.logInfo(PLUGIN_NAME, 'UUID: ' + sensorTag.uuid);
 
     });
+*/
 
   }
 

@@ -62,12 +62,12 @@ Medley.prototype.start = function() {
   var success;
   var that = this;
 
-  var setupUnitFnc = function(UnitClass, aPluginConf, aPluginConfName) {
+  var loadUnitFnc = function(UnitClass, aPluginConf, aPluginConfName) {
 
     var anUnit = new UnitClass();
     anUnit.name = aPluginConfName;
 
-    that.logOkay(anUnit.pluginName + ':' + aPluginConfName, 'Unit Setup');
+    that.logOkay(anUnit.pluginName + ':' + aPluginConfName, 'Unit Loaded');
 
     anUnit.on('ready', function() {
       that.unitReady(anUnit);
@@ -96,7 +96,7 @@ Medley.prototype.start = function() {
     if (allPluginConfs !== undefined) {
 
       for(aPluginConfName in allPluginConfs) {
-        setupUnitFnc(this.plugins[aPluginName].classDef, allPluginConfs[aPluginConfName], aPluginConfName);
+        loadUnitFnc(this.plugins[aPluginName].classDef, allPluginConfs[aPluginConfName], aPluginConfName);
       }
 
     }
@@ -116,6 +116,15 @@ Medley.prototype.createProgram = function(programName, dependencies, code) {
 
   this.programs.push(newProgram);
   this.launchPrograms();
+
+};
+
+
+
+Medley.prototype.loadProgram = function(path) {
+
+  var programBundle = require(path);
+  programBundle(this);
 
 };
 
