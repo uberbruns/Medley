@@ -1,6 +1,9 @@
 var medley = require(__dirname +'/src/medley.js');
 medley.loadPlugin(__dirname +'/src/medley-hid.js');
 medley.loadPlugin(__dirname +'/src/medley-sensor-tag.js');
+medley.loadPlugin(__dirname +'/src/medley-leap.js');
+
+
 
 
 medley.config({
@@ -17,6 +20,10 @@ medley.config({
         readKeys: true,
         irTemperatureReadInterval: 2000
       }
+    },
+
+    leap: {
+      one: {}
     }
 
 });
@@ -44,12 +51,27 @@ medley.createProgram('mix', ['hid:gamepad', 'sensorTag:one'], function(program, 
 
 
 
-medley.createProgram('controller', ['hid:gamepad'], function(program, gamepad) {
+medley.createProgram('gamepad', ['hid:gamepad'], function(program, gamepad) {
 
   gamepad.on('dataChange', function() {
     var data = gamepad.state.data;
-    medley.logDebug('controller', data);
+    medley.logDebug('gamepad', data);
   });
 
+});
+
+
+
+medley.createProgram('leap', ['leap:one'], function(program, leap) {
+
+  leap.on('frameChange', function() {
+
+    var frame = leap.state.frame;
+
+    for (var key in frame.handsMap) {
+      var hand = frame.handsMap[key];
+    };
+
+  });
 
 });

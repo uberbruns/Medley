@@ -22,21 +22,21 @@ util.inherits(SensorTagUnit, events.EventEmitter);
 
 SensorTagUnit.prototype.start = function(config) {
 
-  var that = this;
+  var thisUnit = this;
 
   SensorTag.discover(function(sensorTag) {
 
     async.series([
 
       function(callback) {
-        that.emit('logInfo', PLUGIN_NAME, 'Connected');
+        thisUnit.emit('logInfo', 'Connected');
         sensorTag.connect(callback);
       },
 
       function(callback) {
-        that.emit('logInfo', PLUGIN_NAME, 'Discovering Services And Characteristics');
+        thisUnit.emit('logInfo', 'Discovering Services And Characteristics');
         sensorTag.discoverServicesAndCharacteristics(function() {
-          that.emit('ready');
+          thisUnit.emit('ready');
           callback();
         });
       },
@@ -46,8 +46,8 @@ SensorTagUnit.prototype.start = function(config) {
           sensorTag.notifySimpleKey(function() {});
           sensorTag.on('simpleKeyChange', function(left, right) {
             var keys = { left: left, right: right };
-            that.state.keys = keys;
-            that.emit('change', 'keys', keys);
+            thisUnit.state.keys = keys;
+            thisUnit.emit('change', 'keys', keys);
           });
         }
         callback();
@@ -67,8 +67,8 @@ SensorTagUnit.prototype.start = function(config) {
                 object: objectTemperature.toFixed(1),
                 ambient: ambientTemperature.toFixed(1)
               };
-              that.state.temperature = temp;
-              that.emit('change', 'temperature', temp);
+              thisUnit.state.temperature = temp;
+              thisUnit.emit('change', 'temperature', temp);
             });
           }, config.irTemperatureReadInterval);
         }
@@ -76,7 +76,7 @@ SensorTagUnit.prototype.start = function(config) {
 
     ]);
 
-    that.emit('logInfo' ,PLUGIN_NAME, 'SensorTag Found');
+    thisUnit.emit('logInfo' ,PLUGIN_NAME, 'SensorTag Found');
 
   }, config.uuid);
 

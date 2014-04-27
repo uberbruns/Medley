@@ -4,8 +4,8 @@ async = require('async'),
 colors = require('colors'),
 S = require('string');
 
-var DEBUG = 1,
-INFO = 0,
+var INFO = 0,
+DEBUG = 1,
 INPUT = 2,
 OKAY = 3;
 
@@ -21,14 +21,14 @@ var Program = function() {
 
 
 
-function Medley() {
+var Medley = function() {
 
   this.plugins = {};
   this.programs = [];
   this.conf = {};
   this.units = [];
 
-}
+};
 util.inherits(Medley, events.EventEmitter);
 
 
@@ -67,6 +67,8 @@ Medley.prototype.start = function() {
     var anUnit = new UnitClass();
     anUnit.name = aPluginConfName;
 
+    that.logOkay(anUnit.pluginName + ':' + aPluginConfName, 'Unit Setup');
+
     anUnit.on('ready', function() {
       that.unitReady(anUnit);
     });
@@ -75,8 +77,8 @@ Medley.prototype.start = function() {
       that.log(level, section, msg);
     });
 
-    anUnit.on('logInfo', function(section, msg) {
-      that.logInfo(section, msg);
+    anUnit.on('logInfo', function(msg) {
+      that.logInfo(anUnit.pluginName, msg);
     });
 
     anUnit.on('change', function(key) {
@@ -92,9 +94,11 @@ Medley.prototype.start = function() {
     allPluginConfs = this.conf[aPluginName];
 
     if (allPluginConfs !== undefined) {
+
       for(aPluginConfName in allPluginConfs) {
         setupUnitFnc(this.plugins[aPluginName].classDef, allPluginConfs[aPluginConfName], aPluginConfName);
       }
+
     }
 
   }
@@ -135,13 +139,13 @@ Medley.prototype.launchPrograms = function() {
       aProgram.dependencies.forEach(function(dependency) {
 
         var comp = dependency.split(':');
-        var plugin = comp[0];
-        var name = comp[1];
+        var pluginName = comp[0];
+        var confName = comp[1];
 
         that.units.forEach(function(anUnit) {
-          var isValidPlugin = (plugin !== undefined && plugin == anUnit.pluginName);
-          var isValidName = (name !== undefined && name === anUnit.name);
-          if (isValidPlugin && isValidName) {
+          var rightPluginName = (pluginName !== undefined && pluginName == anUnit.pluginName);
+          var rightConfName = (confName !== undefined && confName === anUnit.name);
+          if (rightPluginName && rightConfName) {
             unitCollection.push(anUnit);
           }
         });

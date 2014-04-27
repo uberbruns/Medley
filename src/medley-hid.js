@@ -23,12 +23,12 @@ util.inherits(HIDUnit, events.EventEmitter);
 HIDUnit.prototype.start = function(config) {
 
   var i, device, devices = HID.devices();
-  var that = this;
+  var thisUnit = this;
 
   var dataFnc = function(data) {
         
     var n = data.toJSON();
-    var o = that.state.data;
+    var o = thisUnit.state.data;
 
     if (n[0] !== o[0] ||
       n[1] !== o[1] ||
@@ -36,8 +36,8 @@ HIDUnit.prototype.start = function(config) {
       n[3] !== o[3] ||
       n[4] !== o[4] ||
       n[5] !== o[5]) {
-      that.state.data = n;
-      that.emit('change', 'data');
+      thisUnit.state.data = n;
+      thisUnit.emit('change', 'data');
     }
     
   };
