@@ -169,7 +169,7 @@ Medley.prototype.launchPrograms = function() {
 Medley.prototype.unitStateChanged = function(unit, key) {
 
   // this.log(INPUT, unit.pluginName + ':' + unit.name , unit.state[key]);
-  unit.emit(key + 'Change');
+  unit.emit(key + 'Change', unit.state[key]);
 
 };
 

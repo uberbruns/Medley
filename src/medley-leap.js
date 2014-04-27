@@ -15,6 +15,7 @@ var LeapUnit = function() {
 util.inherits(LeapUnit, events.EventEmitter);
 
 
+
 LeapUnit.prototype.start = function(config) {
 
   var thisUnit = this;
@@ -26,7 +27,7 @@ LeapUnit.prototype.start = function(config) {
       thisUnit._ready = true;
       thisUnit.emit('logInfo', 'Ready');
       thisUnit.emit('ready');
-    };
+    }
   });
 
   controller.on('connect', function() {
@@ -54,9 +55,7 @@ LeapUnit.prototype.start = function(config) {
 
 
 module.exports = {
-
   pluginName: PLUGIN_NAME,
   classDef: LeapUnit,
   onLoad: function(medley) {}
-
 };

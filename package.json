@@ -3,11 +3,15 @@
   "version": "0.0.1",
   "description": "Require.js for Hardware",
   "main": "index.js",
+  "repository": "https://github.com/uberbruns/Medley.git",
   "dependencies": {
     "sensortag": "~0.1.7",
     "async": "~0.7.0",
     "colors": "~0.6.2",
-    "string": "~1.8.1"
+    "string": "~1.8.1",
+    "underscore": "~1.6.0",
+    "midi": "~0.9.0",
+    "node-hid": "~0.3.1"
   },
   "devDependencies": {
     "grunt": "~0.4.4",

@@ -1,6 +1,7 @@
 var util = require('util');
 var events = require('events');
 var HID = require('node-hid');
+var _ = require('underscore');
 
 var PLUGIN_NAME = 'hid';
 
@@ -30,17 +31,13 @@ HIDUnit.prototype.start = function(config) {
     var n = data.toJSON();
     var o = thisUnit.state.data;
 
-    if (n[0] !== o[0] ||
-      n[1] !== o[1] ||
-      n[2] !== o[2] ||
-      n[3] !== o[3] ||
-      n[4] !== o[4] ||
-      n[5] !== o[5]) {
+    if (_.isEqual(n, o) === false) {
       thisUnit.state.data = n;
       thisUnit.emit('change', 'data');
     }
     
   };
+
 
   for (i = 0; i < devices.length; i++) {
 
@@ -56,6 +53,7 @@ HIDUnit.prototype.start = function(config) {
   }
 
 };
+
 
 
 module.exports = {
