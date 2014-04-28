@@ -51,6 +51,7 @@ MIDIUnit.prototype.start = function(config) {
       channel: midiChannel+1,
       note: message[1],
       value: message[2],
+      deltaTime: deltaTime
     };
 
     thisUnit.state.input = midiInput;

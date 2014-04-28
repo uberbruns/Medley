@@ -11,8 +11,6 @@ SoundBoard.prototype.init = function(program, mpk, sensorTag) {
 
   mpk.on('inputChange', function(input) {
 
-    // console.log(input);
-
     if (input.on ) {
 
       if (input.channel == 1) {
@@ -27,12 +25,12 @@ SoundBoard.prototype.init = function(program, mpk, sensorTag) {
 
   });
 
+
   sensorTag.on('keysChange', function(keys) {
 
     if (keys.right) {
         sfx.random();
     }
-
 
   });
 
