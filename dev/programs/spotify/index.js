@@ -20,11 +20,11 @@ module.exports = function(medley) {
 
       spotify.setVolume(volume, function() {
         spotify.getState(function(err, state) {
-            // console.log(state.volume);
+            // medley.logDebug('spotify:volume', state.volume);
         });
       });
 
-      // medley.logDebug('mix', temperature);
+      medley.logDebug('mix', temperature);
     });
 
 

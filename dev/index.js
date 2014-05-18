@@ -38,11 +38,11 @@ medley.config({
 });
 
 
-medley.loadProgram(__dirname +'/programs/soundboard/index.js');
+// medley.loadProgram(__dirname +'/programs/soundboard/index.js');
 medley.loadProgram(__dirname +'/programs/spotify/index.js');
 
 
-
+/*
 medley.createProgram('mix', ['hid:gamepad', 'sensorTag:one'], function(program, gamepad, sensorTag) {
 
   gamepad.on('dataChange', function() {
@@ -105,4 +105,4 @@ medley.createProgram('midi', ['midi:mpk'], function(program, mpk) {
   });
 
 });
-
+*/
