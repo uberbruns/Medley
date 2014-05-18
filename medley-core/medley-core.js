@@ -8,6 +8,7 @@ var INFO = 0,
 DEBUG = 1,
 INPUT = 2,
 OKAY = 3;
+ERROR = 6;
 
 
 var Program = function() {
@@ -73,6 +74,10 @@ Medley.prototype.start = function() {
       that.unitReady(anUnit);
     });
 
+    anUnit.on('change', function(key) {
+      that.unitStateChanged(anUnit, key);
+    });
+
     anUnit.on('log', function(level, section, msg) {
       that.log(level, section, msg);
     });
@@ -81,8 +86,8 @@ Medley.prototype.start = function() {
       that.logInfo(anUnit.pluginName, msg);
     });
 
-    anUnit.on('change', function(key) {
-      that.unitStateChanged(anUnit, key);
+    anUnit.on('logError', function(msg) {
+      that.logError(anUnit.pluginName, msg);
     });
 
     anUnit.start(aPluginConf);
@@ -213,6 +218,8 @@ Medley.prototype.log = function(level, section, msg) {
     levelStr = 'OKAY'.green;
   } else if (level == INPUT) {
     levelStr = 'INPUT'.blue;
+  } else if (level == ERROR) {
+    levelStr = 'ERROR'.red;
   }
 
   levelStr = S(levelStr).padRight(17).s;
@@ -243,6 +250,13 @@ Medley.prototype.logInfo = function(section, msg) {
 Medley.prototype.logOkay = function(section, msg) {
 
   this.log(OKAY, section, msg);
+
+};
+
+
+Medley.prototype.logError = function(section, msg) {
+
+  this.log(ERROR, section, msg);
 
 };
 

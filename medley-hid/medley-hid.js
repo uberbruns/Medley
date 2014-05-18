@@ -43,10 +43,23 @@ HIDUnit.prototype.start = function(config) {
 
     device = devices[i];
 
-    if (device.path == config.path) {
+    var pathTest = (config.path === undefined) || (config.path === device.path);
+    var productTest = (config.product === undefined) || (config.product === device.product);
+
+    if (pathTest && productTest) {
+
       this.device = new HID.HID(device.path);
+      
       this.device.on('data', dataFnc);
+
+      this.device.on('error', function(err) {
+
+        thisUnit.emit('logError', err);
+
+      });      
+
       this.emit('ready');
+      
       return;
     }
 
@@ -67,7 +80,7 @@ module.exports = {
     
     for (var i = 0; i < devices.length; i++) {
        device = devices[i];
-       medley.log(0, 'hid', device.product + ': ' + device.path);
+       medley.logInfo(PLUGIN_NAME, device.product + ': ' + device.path);
      }
 
   }
