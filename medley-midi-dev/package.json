@@ -1,0 +1,15 @@
+{
+  "name": "medley-midi-dev",
+  "version": "0.0.1",
+  "description": "",
+  "main": "midi-dev.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bufferjs": "=1.1.0"
+  },
+  "keywords": [],
+  "author": "Karsten Bruns",
+  "license": "ISC"
+}
