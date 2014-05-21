@@ -23,7 +23,6 @@ util.inherits(HIDUnit, events.EventEmitter);
 
 HIDUnit.prototype.start = function(config) {
 
-  var i, device, devices = HID.devices();
   var thisUnit = this;
 
   var dataFnc = function(data) {
@@ -38,32 +37,47 @@ HIDUnit.prototype.start = function(config) {
     
   };
 
+  var eventBindingFnc = function(config) {
 
-  for (i = 0; i < devices.length; i++) {
+    var i, device, devices = HID.devices();
 
-    device = devices[i];
+    // thisUnit.emit('logInfo', devices);
 
-    var pathTest = (config.path === undefined) || (config.path === device.path);
-    var productTest = (config.product === undefined) || (config.product === device.product);
+    for (i = 0; i < devices.length; i++) {
 
-    if (pathTest && productTest) {
+      device = devices[i];
 
-      this.device = new HID.HID(device.path);
-      
-      this.device.on('data', dataFnc);
+      var pathTest = (config.path === undefined) || (config.path === device.path);
+      var productTest = (config.product === undefined) || (config.product === device.product);
 
-      this.device.on('error', function(err) {
+      if (pathTest && productTest) {
 
-        thisUnit.emit('logError', err);
+        thisUnit.device = new HID.HID(device.path);
+        
+        thisUnit.device.on('data', dataFnc);
 
-      });      
+        thisUnit.device.on('error', function(err) {
 
-      this.emit('ready');
-      
-      return;
+          thisUnit.emit('logError', err);
+
+          // Retry
+          setTimeout(function() {
+            eventBindingFnc(config);
+          }, 1000);
+
+        });      
+
+        thisUnit.emit('ready');
+        
+        return;
+
+      }
+
     }
 
   }
+
+  eventBindingFnc(config);
 
 };
 
